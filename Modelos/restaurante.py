@@ -28,13 +28,14 @@ class Restaurante:
 
 
     def receber_avaliacao(self, cliente, nota):
-        avaliacao = Avaliacao(cliente, nota )
-        self._avaliacao.append(avaliacao)
+        if 0 < nota <= 5:
+            avaliacao = Avaliacao(cliente, nota )
+            self._avaliacao.append(avaliacao)
 
     @property
     def media_avaliacoes(self):
         if not self._avaliacao: #senao tiver nenhuma avalicao retorna 0
-            return 0
+            return ' - '
         soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao) #utilizando sum, a gente somou especificando que só queremos a nota da avaliação
         quantidade_notas = len(self._avaliacao) # aqui vemos a quantidade de notas que temos
         media = round(soma_das_notas / quantidade_notas,1) # temos a media, e utilizando o round mostramos apenas uma casa decimal
